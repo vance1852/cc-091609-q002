@@ -1,0 +1,1 @@
+{"prescription":"rx-204-v3","ingredients":[{"id":"i-1","name":"附片","technique":"pre-decoct"},{"id":"i-2","name":"薄荷","technique":"add-late"},{"id":"i-3","name":"阿胶","technique":"melt-separately"}],"events":[{"kind":"machine-fault","machine":"pot-07"},{"kind":"shift-handoff","from":"worker-a","to":"worker-b"}]}
