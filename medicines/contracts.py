@@ -12,6 +12,7 @@ class Technique(StrEnum):
     ADD_LATE = "add-late"
     MELT_SEPARATELY = "melt-separately"
     PACK = "pack"
+    RETAIN_SAMPLE = "retain-sample"
 
 
 @dataclass(frozen=True)
@@ -32,6 +33,12 @@ class ProcessStep:
     earliest_start: datetime
     duration_seconds: int
     depends_on: tuple[str, ...] = ()
+    # 实际执行数据在步骤完成后补登，仅允许写入一次。
+    actual_started_at: datetime | None = None
+    actual_finished_at: datetime | None = None
+    actual_temperature_celsius: float | None = None
+    actual_duration_seconds: int | None = None
+    machine_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -42,3 +49,5 @@ class MachineEvent:
     occurred_at: datetime
     operator_id: str
     temperature_celsius: float | None = None
+    # scan_code 用于扫码投料/重试的幂等去重：同一扫码事件重复上报不会二次投料。
+    scan_code: str | None = None
